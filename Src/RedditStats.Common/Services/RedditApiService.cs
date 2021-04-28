@@ -26,7 +26,7 @@ namespace RedditStats.Common
                 if (userListingResponse is not null)
                     yield return userListingResponse;
 
-            } while (userListingResponse?.Data.After != null);
+            } while (!string.IsNullOrWhiteSpace(userListingResponse?.Data.After));
         }
     }
 }
