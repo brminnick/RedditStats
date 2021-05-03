@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditStats.Functions", "RedditStats.Functions\RedditStats.Functions.csproj", "{F5ED52B8-5153-495B-AAAC-BF6896799299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{F50D9E12-E965-44BD-B556-B0A70D66758C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F50D9E12-E965-44BD-B556-B0A70D66758C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F50D9E12-E965-44BD-B556-B0A70D66758C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5ED52B8-5153-495B-AAAC-BF6896799299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5ED52B8-5153-495B-AAAC-BF6896799299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5ED52B8-5153-495B-AAAC-BF6896799299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5ED52B8-5153-495B-AAAC-BF6896799299}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
