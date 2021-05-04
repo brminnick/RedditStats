@@ -56,12 +56,12 @@ namespace RedditStats.Functions
             catch (ApiException exception)
             {
                 response = req.CreateResponse(exception.StatusCode);
+                response.Headers = new HttpHeadersCollection(exception.Headers);
 
                 if (exception.Content is not null)
                     await response.WriteStringAsync(exception.Content).ConfigureAwait(false);
             }
 
-            response.Headers = new HttpHeadersCollection(exception.Headers);
             return response;
         }
     }
