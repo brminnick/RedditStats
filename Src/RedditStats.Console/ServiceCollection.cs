@@ -18,7 +18,7 @@ namespace RedditStats.Console
             services.AddSingleton<RedditApiService>();
 
             // Refit Clients
-            services.AddSingleton(Refit.RestService.For<IRedditApi>(RedditApiConstants.BaseUrl));
+            services.AddSingleton(Refit.RestService.For<IRedditApi>(RedditApiConstants.BaseRedditApiUrl));
 
             return services.BuildServiceProvider();
         }

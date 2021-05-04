@@ -13,7 +13,7 @@ namespace RedditStats.Console
             var cancellationToken = new CancellationTokenSource(TimeSpan.FromMinutes(1));
             var redditApiService = ServiceCollection.ServiceProvider.GetRequiredService<RedditApiService>();
 
-            await foreach (var response in redditApiService.GetUserListing("brminnick", cancellationToken.Token).ConfigureAwait(false))
+            await foreach (var response in redditApiService.GetSubmissions("brminnick", cancellationToken.Token).ConfigureAwait(false))
             {
                 foreach (var child in response.Data.Children)
                 {

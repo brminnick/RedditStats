@@ -7,6 +7,9 @@ namespace RedditStats.Common
 {
     public class UserListingResponse
     {
+        [JsonPropertyName("type")]
+        public RedditType Type => Kind.ToRedditType();
+
         [JsonPropertyName("kind")]
         public string Kind { get; init; } = string.Empty;
 
@@ -557,6 +560,24 @@ namespace RedditStats.Common
     public class Variants
     {
 
+    }
+
+    public enum RedditType { Unknown = 0, Comment = 1, Account = 2, Link = 3, Message = 4, Subreddit = 5, Award = 6 };
+
+    public static class RedditTypeExtensions
+    {
+        public static RedditType ToRedditType(this string kind)
+        {
+            try
+            {
+                var typeNumber = int.Parse($"{kind[1]}");
+                return (RedditType)typeNumber;
+            }
+            catch
+            {
+                return RedditType.Unknown;
+            }
+        }
     }
 }
 

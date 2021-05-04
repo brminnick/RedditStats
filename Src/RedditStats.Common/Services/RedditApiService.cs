@@ -10,7 +10,7 @@ namespace RedditStats.Common
 
         public RedditApiService(IRedditApi redditApi) => _redditApiClient = redditApi;
 
-        public async IAsyncEnumerable<UserListingResponse> GetUserListing(string username, [EnumeratorCancellation] CancellationToken cancellationToken)
+        public async IAsyncEnumerable<UserListingResponse> GetSubmissions(string username, [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             UserListingResponse? userListingResponse = null;
 
@@ -18,7 +18,7 @@ namespace RedditStats.Common
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var apiResponse = await _redditApiClient.GetUserListing(username, userListingResponse?.Data.After).ConfigureAwait(false);
+                var apiResponse = await _redditApiClient.GetSubmissions(username, userListingResponse?.Data.After).ConfigureAwait(false);
                 await apiResponse.EnsureSuccessStatusCodeAsync().ConfigureAwait(false);
 
                 userListingResponse = apiResponse.Content;

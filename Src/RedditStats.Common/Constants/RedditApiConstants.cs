@@ -2,6 +2,6 @@
 {
     public static class RedditApiConstants
     {
-        public const string BaseUrl = "https://reddit.com";
+        public const string BaseRedditApiUrl = "https://api.reddit.com";
     }
 }

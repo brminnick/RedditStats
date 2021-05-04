@@ -25,7 +25,7 @@ namespace RedditStats.Functions
                     services.AddHttpClient();
 
                     services.AddRefitClient<IRedditApi>()
-                        .ConfigureHttpClient(client => client.BaseAddress = new Uri(RedditApiConstants.BaseUrl))
+                        .ConfigureHttpClient(client => client.BaseAddress = new Uri(RedditApiConstants.BaseRedditApiUrl))
                         .ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler { AutomaticDecompression = getDecompressionMethods() })
                         .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(3, sleepDurationProvider));
 
