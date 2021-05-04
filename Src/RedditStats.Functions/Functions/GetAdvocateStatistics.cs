@@ -25,6 +25,8 @@ namespace RedditStats.Functions
         [Function(nameof(GetAdvocateSubmissions))]
         public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req, FunctionContext context)
         {
+            HttpResponseData response;
+
             var log = context.GetLogger<GetAdvocateSubmissions>();
             log.LogInformation("Retrieving Advocate Reddit Post Statistics");
 
@@ -48,21 +50,19 @@ namespace RedditStats.Functions
                     }
                 }
 
-                var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
+                response = req.CreateResponse(System.Net.HttpStatusCode.OK);
                 await response.WriteAsJsonAsync(redditDataDictionary).ConfigureAwait(false);
-
-                return response;
             }
             catch (ApiException exception)
             {
-                var response = req.CreateResponse(exception.StatusCode);
-                response.Headers = new HttpHeadersCollection(exception.Headers);
+                response = req.CreateResponse(exception.StatusCode);
 
                 if (exception.Content is not null)
                     await response.WriteStringAsync(exception.Content).ConfigureAwait(false);
-
-                return response;
             }
+
+            response.Headers = new HttpHeadersCollection(exception.Headers);
+            return response;
         }
     }
 }
