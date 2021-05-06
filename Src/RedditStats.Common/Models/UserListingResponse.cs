@@ -425,7 +425,7 @@ namespace RedditStats.Common
         public object? DiscussionType { get; init; }
 
         [JsonPropertyName("num_comments")]
-        public int NumComments { get; init; }
+        public int TotalComments { get; init; }
 
         [JsonPropertyName("send_replies")]
         public bool SendReplies { get; init; }

@@ -30,22 +30,21 @@ namespace RedditStats.Functions
             var log = context.GetLogger<GetAdvocateSubmissions>();
             log.LogInformation("Retrieving Advocate Reddit Post Statistics");
 
-            var cancellationToken = new CancellationTokenSource(TimeSpan.FromMinutes(10));
-            var redditDataDictionary = new Dictionary<string, List<UserListingResponse>>();
+            var redditDataDictionary = new Dictionary<string, List<AdvocateSubmissions>>();
 
             try
             {
                 foreach (var userName in _redditUserNames)
                 {
                     log.LogInformation($"Retrieving Data for {userName}");
-                    redditDataDictionary.Add(userName, new List<UserListingResponse>());
+                    redditDataDictionary.Add(userName, new List<AdvocateSubmissions>());
 
-                    await foreach (var userListingResponse in _redditApiService.GetSubmissions(userName, cancellationToken.Token).ConfigureAwait(false))
+                    await foreach (var userListingResponse in _redditApiService.GetSubmissions(userName, CancellationToken.None).ConfigureAwait(false))
                     {
                         foreach (var child in userListingResponse.Data.Children)
                         {
                             log.LogInformation($"Retrived {userName} post from {DateTimeOffset.FromUnixTimeSeconds((long)child.Data.CreatedUtc)}");
-                            redditDataDictionary[userName].Add(child);
+                            redditDataDictionary[userName].Add(new AdvocateSubmissions(child.Data));
                         }
                     }
                 }
