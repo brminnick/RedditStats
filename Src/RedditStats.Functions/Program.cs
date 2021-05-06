@@ -17,13 +17,12 @@ namespace RedditStats.Functions
     {
         readonly static string _storageConnectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage") ?? string.Empty;
 
-        public static Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
-            InitializeDatabase(host);
-
-            return host.RunAsync();
+            await InitializeDatabase(host);
+            await host.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args)
@@ -53,7 +52,7 @@ namespace RedditStats.Functions
             static DecompressionMethods getDecompressionMethods() => DecompressionMethods.Deflate | DecompressionMethods.GZip;
         }
 
-        static void InitializeDatabase(in IHost host)
+        static async Task InitializeDatabase(IHost host)
         {
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
@@ -61,7 +60,7 @@ namespace RedditStats.Functions
             try
             {
                 var context = services.GetRequiredService<AdvocateStatisticsDbContext>();
-                DbInitializer.Initialize(context);
+                await DbInitializer.Initialize(context);
             }
             catch (Exception ex)
             {
