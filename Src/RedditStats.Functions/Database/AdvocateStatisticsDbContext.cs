@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RedditStats.Common;
 
 namespace RedditStats.Functions
 {
@@ -8,6 +9,13 @@ namespace RedditStats.Functions
         {
         }
 
-        public DbSet<GetAdvocateSubmissions> AdvocateSubmissions => Set<GetAdvocateSubmissions>();
+        public DbSet<AdvocateSubmissions> AdvocateSubmissions => Set<AdvocateSubmissions>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<AdvocateSubmissions>().HasKey(x => x.RedditUri);
+        }
     }
 }
