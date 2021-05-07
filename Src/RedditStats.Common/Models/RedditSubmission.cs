@@ -34,7 +34,7 @@ namespace RedditStats.Common
         public int CommentCount { get; init; }
         public bool IsAwarded { get; init; }
         public Uri? RedditUri { get; init; }
-        public DateTimeOffset? CreatedAt { get; init; }
-        public DateTimeOffset? UpdatedAt { get; init; }
+        public DateTimeOffset CreatedAt { get; init; }
+        public DateTimeOffset UpdatedAt { get; init; }
     }
 }
