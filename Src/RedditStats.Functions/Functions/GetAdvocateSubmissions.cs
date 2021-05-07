@@ -20,7 +20,7 @@ namespace RedditStats.Functions
             var log = context.GetLogger<GetAdvocateSubmissions>();
             log.LogInformation("Retrieving Advocate Reddit Post Statistics");
 
-            IReadOnlyList<RedditSubmission> advocateSubmissions = await _advocateStatisticsDbContext.Submissions.ToListAsync();
+            IReadOnlyList<RedditSubmission> advocateSubmissions = await _advocateStatisticsDbContext.Submissions.ToListAsync().ConfigureAwait(false);
 
             var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
             await response.WriteAsJsonAsync(advocateSubmissions).ConfigureAwait(false);
