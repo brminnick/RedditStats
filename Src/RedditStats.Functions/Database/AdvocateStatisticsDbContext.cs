@@ -9,13 +9,18 @@ namespace RedditStats.Functions
         {
         }
 
-        public DbSet<AdvocateSubmissions> AdvocateSubmissions => Set<AdvocateSubmissions>();
+        public DbSet<RedditSubmission> Submissions => Set<RedditSubmission>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<AdvocateSubmissions>().HasKey(x => x.RedditUri);
+            modelBuilder.Entity<RedditSubmission>().HasKey(x => x.RedditUri);
+
+            modelBuilder.Entity<RedditSubmission>().Property(x => x.CreatedAt).HasDefaultValueSql("SYSDATETIMEOFFSET()");
+            modelBuilder.Entity<RedditSubmission>().Property(x => x.UpdatedAt).HasDefaultValueSql("SYSDATETIMEOFFSET()");
+
+            modelBuilder.Entity<RedditSubmission>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate().Metadata.SetAfterSaveBehavior(Microsoft.EntityFrameworkCore.Metadata.PropertySaveBehavior.Save);
         }
     }
 }

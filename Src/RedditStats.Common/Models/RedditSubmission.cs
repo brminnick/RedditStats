@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace RedditStats.Common
 {
-    public class AdvocateSubmissions
+    public class RedditSubmission
     {
-        public AdvocateSubmissions(RedditData redditData) : this()
+        public RedditSubmission(RedditData redditData) : this()
         {
-            CreatedAt = DateTimeOffset.FromUnixTimeSeconds((long)redditData.CreatedUtc);
+            SubmittedAt = DateTimeOffset.FromUnixTimeSeconds((long)redditData.CreatedUtc);
             UpVoteRatio = redditData.UpvoteRatio;
             UpVotes = redditData.Ups;
             DownVotes = redditData.Downs;
@@ -19,19 +19,25 @@ namespace RedditStats.Common
             CommentCount = redditData.TotalComments;
         }
 
-        public AdvocateSubmissions()
+        public RedditSubmission()
         {
+            if (CreatedAt == default)
+                CreatedAt = DateTimeOffset.UtcNow;
+
+            UpdatedAt = DateTimeOffset.UtcNow;
         }
 
         public string Author { get; init; } = string.Empty;
         public string Title { get; init; } = string.Empty;
         public string Subreddit { get; init; } = string.Empty;
-        public DateTimeOffset CreatedAt { get; init; }
+        public DateTimeOffset SubmittedAt { get; init; }
         public double UpVoteRatio { get; init; }
         public int UpVotes { get; init; }
         public int DownVotes { get; init; }
         public int CommentCount { get; init; }
         public bool IsAwarded { get; init; }
         public Uri? RedditUri { get; init; }
+        public DateTimeOffset CreatedAt { get; init; }
+        public DateTimeOffset UpdatedAt { get; init; }
     }
 }
