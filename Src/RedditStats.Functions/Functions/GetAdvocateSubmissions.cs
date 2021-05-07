@@ -5,7 +5,6 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RedditStats.Common;
-using Refit;
 
 namespace RedditStats.Functions
 {
