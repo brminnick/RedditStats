@@ -21,7 +21,7 @@ namespace RedditStats.Common
 
         public RedditSubmission()
         {
-
+            UpdatedAt = DateTimeOffset.UtcNow;
         }
 
         public string Author { get; init; } = string.Empty;
@@ -34,7 +34,6 @@ namespace RedditStats.Common
         public int CommentCount { get; init; }
         public bool IsAwarded { get; init; }
         public Uri? RedditUri { get; init; }
-        public DateTimeOffset CreatedAt { get; init; }
         public DateTimeOffset UpdatedAt { get; init; }
     }
 }

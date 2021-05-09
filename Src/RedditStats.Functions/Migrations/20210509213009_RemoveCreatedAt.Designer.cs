@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RedditStats.Functions;
 
 namespace RedditStats.Functions.Migrations
 {
     [DbContext(typeof(AdvocateStatisticsDbContext))]
-    partial class AdvocateStatisticsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210509213009_RemoveCreatedAt")]
+    partial class RemoveCreatedAt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
