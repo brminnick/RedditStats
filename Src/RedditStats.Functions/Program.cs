@@ -31,11 +31,13 @@ namespace RedditStats.Functions
             return new HostBuilder()
                 .ConfigureAppConfiguration(configurationBuilder => configurationBuilder.AddCommandLine(args))
                 .ConfigureFunctionsWorkerDefaults()
-                .ConfigureLogging(c => c.SetMinimumLevel(LogLevel.Error)) //https://github.com/Azure/azure-functions-dotnet-worker/issues/417#issue-868350136
                 .ConfigureServices(services =>
                 {
                     // HttpClients
                     services.AddHttpClient();
+
+                    //Logging
+                    services.AddLogging();
 
                     // DbContexts
                     services.AddDbContext<AdvocateStatisticsDbContext>(options => options.UseSqlServer(_databaseConnectionString));

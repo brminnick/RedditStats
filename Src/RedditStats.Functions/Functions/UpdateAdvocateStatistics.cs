@@ -26,7 +26,7 @@ namespace RedditStats.Functions
         }
 
         [Function(nameof(UpdateAdvocateStatistics))]
-        public async Task Run([TimerTrigger("0 0 0 * * *")] TimerInfo myTimer, FunctionContext context)
+        public async Task Run([TimerTrigger("0 0 0 * * *", RunOnStartup = true)] TimerInfo myTimer, FunctionContext context)
         {
             var log = context.GetLogger<UpdateAdvocateStatistics>();
             log.LogInformation($"Running {nameof(UpdateAdvocateStatistics)}");
