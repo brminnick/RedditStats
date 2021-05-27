@@ -28,7 +28,7 @@ jobs:
           
       - name: Build Console App
         run: |              
-          consoleCSProj=`find -name RedditStats.Console.csproj`
+          consoleCSProj=`find . -name RedditStats.Console.csproj`
           echo consoleCSProj $consoleCSProj
 
           dotnet build -c Release $consoleCSProj
