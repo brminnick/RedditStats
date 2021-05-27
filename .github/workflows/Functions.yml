@@ -1,0 +1,33 @@
+name: Xamarin
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches: 
+      - "*"
+
+jobs:
+
+    Build_Android:
+      runs-on: macos-latest
+
+      steps:
+      - uses: actions/checkout@v1
+        
+      - name: Setup .NET v5.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+        
+      - name: Restore NuGet 
+        run: |
+          nuget restore **/**.sln
+          
+      - name: Build Functions App
+        run: |              
+          functionsCSProj = `find -name RedditStats.Functions.csproj`
+          echo functionsCSProj $functionsCSProj
+
+          dotnet build -c Release $functionsCSProj
