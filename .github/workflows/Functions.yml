@@ -1,4 +1,4 @@
-name: Xamarin
+name: Functions
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-    Build_Android:
+    Build:
       runs-on: macos-latest
 
       steps:
@@ -27,7 +27,7 @@ jobs:
           
       - name: Build Functions App
         run: |              
-          functionsCSProj = `find -name RedditStats.Functions.csproj`
+          functionsCSProj=`find . -name RedditStats.Functions.csproj`
           echo functionsCSProj $functionsCSProj
 
           dotnet build -c Release $functionsCSProj
