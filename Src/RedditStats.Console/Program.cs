@@ -18,14 +18,14 @@ namespace RedditStats.Console
 
             await foreach (var redditUserName in advocateService.GetRedditUsernames(cancellationTokenSource.Token).ConfigureAwait(false))
             {
-                WriteLine($"\n\nReddit User Found: {redditUserName}");
+                WriteLine($"Reddit User: {redditUserName}");
 
                 await foreach (var response in redditApiService.GetSubmissions(redditUserName, cancellationTokenSource.Token).ConfigureAwait(false))
                 {
                     foreach (var child in response.Data.Children)
                     {
-                        WriteLine(DateTimeOffset.FromUnixTimeSeconds((long)child.Data.CreatedUtc));
-                        WriteLine(child.Data.LinkPermalink);
+                        WriteLine($"\t{DateTimeOffset.FromUnixTimeSeconds((long)child.Data.CreatedUtc)}");
+                        WriteLine($"\t{child.Data.LinkPermalink}");
                     }
                 }
             }

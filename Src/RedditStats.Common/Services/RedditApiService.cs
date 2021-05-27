@@ -18,7 +18,7 @@ namespace RedditStats.Common
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var apiResponse = await _redditApiClient.GetSubmissions(username, userListingResponse?.Data.After).ConfigureAwait(false);
+                var apiResponse = await _redditApiClient.GetSubmissions(username, cancellationToken, userListingResponse?.Data.After).ConfigureAwait(false);
                 await apiResponse.EnsureSuccessStatusCodeAsync().ConfigureAwait(false);
 
                 userListingResponse = apiResponse.Content;
