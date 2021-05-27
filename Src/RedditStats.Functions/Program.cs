@@ -16,7 +16,7 @@ namespace RedditStats.Functions
     public class Program
     {
         readonly static string _storageConnectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage") ?? string.Empty;
-        readonly static string _databaseConnectionString = Environment.GetEnvironmentVariable("DatabaseConnectionString") ?? throw new ApplicationException("Database Conenction String Required");
+        readonly static string _databaseConnectionString = "Server=tcp:redditstats.database.windows.net,1433;Initial Catalog=RedditStatsDatabase;Persist Security Info=False;User ID=bminnick;Password=*()_+iomega28;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";// Environment.GetEnvironmentVariable("DatabaseConnectionString") ?? throw new ApplicationException("Database Conenction String Required");
 
         public static async Task Main(string[] args)
         {
@@ -48,7 +48,13 @@ namespace RedditStats.Functions
                         .ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler { AutomaticDecompression = getDecompressionMethods() })
                         .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(3, sleepDurationProvider));
 
+                    services.AddRefitClient<IAdvocateApi>()
+                        .ConfigureHttpClient(client => client.BaseAddress = new Uri(AdvocateConstants.BaseAdvocateApi))
+                        .ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler { AutomaticDecompression = getDecompressionMethods() })
+                        .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(3, sleepDurationProvider));
+
                     // Services
+                    services.AddSingleton<AdvocateService>();
                     services.AddSingleton<RedditApiService>();
                 });
 

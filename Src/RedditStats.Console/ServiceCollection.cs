@@ -15,10 +15,12 @@ namespace RedditStats.Console
             var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
 
             // Services
+            services.AddSingleton<AdvocateService>();
             services.AddSingleton<RedditApiService>();
 
             // Refit Clients
             services.AddSingleton(Refit.RestService.For<IRedditApi>(RedditApiConstants.BaseRedditApiUrl));
+            services.AddSingleton(Refit.RestService.For<IAdvocateApi>(AdvocateConstants.BaseAdvocateApi));
 
             return services.BuildServiceProvider();
         }
