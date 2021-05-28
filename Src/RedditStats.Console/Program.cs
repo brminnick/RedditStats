@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using RedditStats.Common;
+using static System.Console;
 
 namespace RedditStats.Console
 {
@@ -10,15 +11,22 @@ namespace RedditStats.Console
     {
         static async Task Main(string[] args)
         {
-            var cancellationToken = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+            var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(10));
+
+            var advocateService = ServiceCollection.ServiceProvider.GetRequiredService<AdvocateService>();
             var redditApiService = ServiceCollection.ServiceProvider.GetRequiredService<RedditApiService>();
 
-            await foreach (var response in redditApiService.GetSubmissions("brminnick", cancellationToken.Token).ConfigureAwait(false))
+            await foreach (var redditUserName in advocateService.GetRedditUsernames(cancellationTokenSource.Token).ConfigureAwait(false))
             {
-                foreach (var child in response.Data.Children)
+                WriteLine($"Reddit User: {redditUserName}");
+
+                await foreach (var response in redditApiService.GetSubmissions(redditUserName, cancellationTokenSource.Token).ConfigureAwait(false))
                 {
-                    System.Console.WriteLine(DateTimeOffset.FromUnixTimeSeconds((long)child.Data.CreatedUtc));
-                    System.Console.WriteLine(child.Data.LinkPermalink);
+                    foreach (var child in response.Data.Children)
+                    {
+                        WriteLine($"\t{DateTimeOffset.FromUnixTimeSeconds((long)child.Data.CreatedUtc)}");
+                        WriteLine($"\t{child.Data.LinkPermalink}");
+                    }
                 }
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
@@ -10,17 +11,15 @@ namespace RedditStats.Functions
 {
     class UpdateAdvocateStatistics
     {
-        readonly static IReadOnlyList<string> _redditUserNames = new[]
-        {
-            "brminnick",
-            "maximrouiller"
-        };
-
+        readonly AdvocateService _advocateService;
         readonly RedditApiService _redditApiService;
         readonly AdvocateStatisticsDbContext _advocateStatisticsDbContext;
 
-        public UpdateAdvocateStatistics(RedditApiService redditApiService, AdvocateStatisticsDbContext advocateStatisticsDbContext)
+        public UpdateAdvocateStatistics(AdvocateService advocateService,
+                                        RedditApiService redditApiService,
+                                        AdvocateStatisticsDbContext advocateStatisticsDbContext)
         {
+            _advocateService = advocateService;
             _redditApiService = redditApiService;
             _advocateStatisticsDbContext = advocateStatisticsDbContext;
         }
@@ -31,7 +30,7 @@ namespace RedditStats.Functions
             var log = context.GetLogger<UpdateAdvocateStatistics>();
             log.LogInformation($"Running {nameof(UpdateAdvocateStatistics)}");
 
-            foreach (var userName in _redditUserNames)
+            await foreach (var userName in _advocateService.GetRedditUsernames(CancellationToken.None).ConfigureAwait(false))
             {
                 log.LogInformation($"Retrieving Data for {userName}");
 

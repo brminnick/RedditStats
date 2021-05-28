@@ -31,6 +31,7 @@ namespace RedditStats.Functions
             return new HostBuilder()
                 .ConfigureAppConfiguration(configurationBuilder => configurationBuilder.AddCommandLine(args))
                 .ConfigureFunctionsWorkerDefaults()
+                .ConfigureLogging(logBuilder => logBuilder.SetMinimumLevel(LogLevel.Error))
                 .ConfigureServices(services =>
                 {
                     // HttpClients
@@ -48,7 +49,13 @@ namespace RedditStats.Functions
                         .ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler { AutomaticDecompression = getDecompressionMethods() })
                         .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(3, sleepDurationProvider));
 
+                    services.AddRefitClient<IAdvocateApi>()
+                        .ConfigureHttpClient(client => client.BaseAddress = new Uri(AdvocateConstants.BaseAdvocateApi))
+                        .ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler { AutomaticDecompression = getDecompressionMethods() })
+                        .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(3, sleepDurationProvider));
+
                     // Services
+                    services.AddSingleton<AdvocateService>();
                     services.AddSingleton<RedditApiService>();
                 });
 

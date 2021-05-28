@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Refit;
 
 namespace RedditStats.Common
@@ -7,6 +8,6 @@ namespace RedditStats.Common
     public interface IRedditApi
     {
         [Get("/user/{username}/submitted")]
-        Task<ApiResponse<UserListingResponse>> GetSubmissions(string username, string? after = null);
+        Task<ApiResponse<UserListingResponse>> GetSubmissions(string username, CancellationToken cancellationToken, string? after = null);
     }
 }
