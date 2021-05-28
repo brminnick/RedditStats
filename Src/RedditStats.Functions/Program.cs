@@ -16,7 +16,7 @@ namespace RedditStats.Functions
     public class Program
     {
         readonly static string _storageConnectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage") ?? string.Empty;
-        readonly static string _databaseConnectionString = Environment.GetEnvironmentVariable("DatabaseConnectionString") ?? throw new ApplicationException("Database Conenction String Required");
+        readonly static string _databaseConnectionString = Environment.GetEnvironmentVariable("DatabaseConnectionString") ?? string.Empty;
 
         public static async Task Main(string[] args)
         {

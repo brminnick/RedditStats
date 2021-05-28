@@ -15,7 +15,7 @@ namespace RedditStats.Functions
         public GetAdvocateSubmissions(AdvocateStatisticsDbContext advocateStatisticsDbContext) => _advocateStatisticsDbContext = advocateStatisticsDbContext;
 
         [Function(nameof(GetAdvocateSubmissions))]
-        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req, FunctionContext context)
+        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, FunctionsConstants.GET)] HttpRequestData req, FunctionContext context)
         {
             var log = context.GetLogger<GetAdvocateSubmissions>();
             log.LogInformation("Retrieving Advocate Reddit Post Statistics");
