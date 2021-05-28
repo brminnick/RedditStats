@@ -11,10 +11,10 @@ namespace RedditStats.Console
     {
         static async Task Main(string[] args)
         {
-            var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+            var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(10));
 
-            var redditApiService = ServiceCollection.ServiceProvider.GetRequiredService<RedditApiService>();
             var advocateService = ServiceCollection.ServiceProvider.GetRequiredService<AdvocateService>();
+            var redditApiService = ServiceCollection.ServiceProvider.GetRequiredService<RedditApiService>();
 
             await foreach (var redditUserName in advocateService.GetRedditUsernames(cancellationTokenSource.Token).ConfigureAwait(false))
             {

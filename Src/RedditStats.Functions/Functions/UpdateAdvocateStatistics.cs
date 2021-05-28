@@ -30,7 +30,7 @@ namespace RedditStats.Functions
             var log = context.GetLogger<UpdateAdvocateStatistics>();
             log.LogInformation($"Running {nameof(UpdateAdvocateStatistics)}");
 
-            await foreach (var userName in GetRedditUsernames(_advocateService).ConfigureAwait(false))
+            await foreach (var userName in _advocateService.GetRedditUsernames(CancellationToken.None).ConfigureAwait(false))
             {
                 log.LogInformation($"Retrieving Data for {userName}");
 

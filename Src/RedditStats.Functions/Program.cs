@@ -31,6 +31,7 @@ namespace RedditStats.Functions
             return new HostBuilder()
                 .ConfigureAppConfiguration(configurationBuilder => configurationBuilder.AddCommandLine(args))
                 .ConfigureFunctionsWorkerDefaults()
+                .ConfigureLogging(logBuilder => logBuilder.SetMinimumLevel(LogLevel.Error))
                 .ConfigureServices(services =>
                 {
                     // HttpClients
