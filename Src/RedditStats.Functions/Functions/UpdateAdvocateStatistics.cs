@@ -51,7 +51,7 @@ namespace RedditStats.Functions
 
         static async ValueTask InsertOrUpdate(AdvocateStatisticsDbContext context, RedditSubmission redditSubmittion)
         {
-            var existingSubmissions = context.Submissions.Find(redditSubmittion.RedditUri);
+            var existingSubmissions = await context.Submissions.FindAsync(redditSubmittion.RedditUri).ConfigureAwait(false);
 
             if (existingSubmissions is null)
                 await context.AddAsync(redditSubmittion).ConfigureAwait(false);
