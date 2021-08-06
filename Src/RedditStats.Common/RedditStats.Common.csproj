@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Polly" Version="7.2.2" />
-    <PackageReference Include="Refit" Version="6.0.38" />
+    <PackageReference Include="Refit" Version="6.0.94" />
   </ItemGroup>
 
   <ItemGroup>
