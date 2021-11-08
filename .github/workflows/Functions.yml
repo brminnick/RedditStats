@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-    Build:
+    Build Functions:
       runs-on: macos-latest
 
       steps:
@@ -23,7 +23,7 @@ jobs:
         
       - name: Restore NuGet 
         run: |
-          nuget restore **/**.sln
+          dotnet restore **/**.sln
           
       - name: Build Functions App
         run: |              
