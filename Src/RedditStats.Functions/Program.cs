@@ -44,7 +44,11 @@ public class Program
 
 				// Refit APIs
 				services.AddRefitClient<IRedditApi>()
-					.ConfigureHttpClient(client => client.BaseAddress = new Uri(RedditApiConstants.BaseRedditApiUrl))
+					.ConfigureHttpClient(client =>
+					{
+						client.BaseAddress = new Uri(AdvocateConstants.BaseAdvocateApi);
+						client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue(new System.Net.Http.Headers.ProductHeaderValue(nameof(RedditStats))));
+					})
 					.ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler { AutomaticDecompression = getDecompressionMethods() })
 					.AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(3, sleepDurationProvider));
 

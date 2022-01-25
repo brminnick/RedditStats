@@ -24,8 +24,19 @@ class Program
 			{
 				foreach (var child in response.Data.Children)
 				{
-					WriteLine($"\t{DateTimeOffset.FromUnixTimeSeconds((long)child.Data.CreatedUtc)}");
-					WriteLine($"\t{child.Data.LinkPermalink}");
+					var advocateSubmission = new RedditSubmission(child.Data);
+
+					WriteLine($"\t{advocateSubmission.Author}");
+					WriteLine($"\t{advocateSubmission.CommentCount}");
+					WriteLine($"\t{advocateSubmission.DownVotes}");
+					WriteLine($"\t{advocateSubmission.IsAwarded}");
+					WriteLine($"\t{advocateSubmission.RedditUri}");
+					WriteLine($"\t{advocateSubmission.SubmittedAt}");
+					WriteLine($"\t{advocateSubmission.Subreddit}");
+					WriteLine($"\t{advocateSubmission.Title}");
+					WriteLine($"\t{advocateSubmission.UpdatedAt}");
+					WriteLine($"\t{advocateSubmission.UpVoteRatio}");
+					WriteLine($"\t{advocateSubmission.UpVotes}");
 				}
 			}
 		}
