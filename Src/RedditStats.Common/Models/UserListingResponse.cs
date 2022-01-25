@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace RedditStats.Common
@@ -23,7 +24,7 @@ namespace RedditStats.Common
 		public Source Source { get; init; } = new();
 
 		[JsonPropertyName("resolutions")]
-		public IReadOnlyList<Source> Resolutions { get; init; } = Array.Empty<Source>();
+		public List<Source> Resolutions { get; init; } = Array.Empty<Source>().ToList();
 
 		[JsonPropertyName("variants")]
 		public Variants Variants { get; init; } = new();
@@ -35,7 +36,7 @@ namespace RedditStats.Common
 	public class Preview
 	{
 		[JsonPropertyName("images")]
-		public IReadOnlyList<Image> Images { get; init; } = Array.Empty<Image>();
+		public List<Image> Images { get; init; } = Array.Empty<Image>().ToList();
 
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; init; }
@@ -92,7 +93,7 @@ namespace RedditStats.Common
 		public object? TiersByRequiredAwardings { get; init; }
 
 		[JsonPropertyName("resized_icons")]
-		public IReadOnlyList<Source> ResizedIcons { get; init; } = Array.Empty<Source>();
+		public List<Source> ResizedIcons { get; init; } = Array.Empty<Source>().ToList();
 
 		[JsonPropertyName("icon_width")]
 		public int IconWidth { get; init; }
@@ -128,7 +129,7 @@ namespace RedditStats.Common
 		public string Name { get; init; } = string.Empty;
 
 		[JsonPropertyName("resized_static_icons")]
-		public IReadOnlyList<Source> ResizedStaticIcons { get; init; } = Array.Empty<Source>();
+		public List<Source> ResizedStaticIcons { get; init; } = Array.Empty<Source>().ToList();
 
 		[JsonPropertyName("icon_format")]
 		public object? IconFormat { get; init; }
@@ -176,7 +177,7 @@ namespace RedditStats.Common
 		public string Title { get; init; } = string.Empty;
 
 		[JsonPropertyName("link_flair_richtext")]
-		public IReadOnlyList<object> LinkFlairRichtext { get; init; } = Array.Empty<object>();
+		public List<object> LinkFlairRichtext { get; init; } = Array.Empty<object>().ToList();
 
 		[JsonPropertyName("subreddit_name_prefixed")]
 		public string SubredditNamePrefixed { get; init; } = string.Empty;
@@ -239,7 +240,7 @@ namespace RedditStats.Common
 		public bool IsOriginalContent { get; init; }
 
 		[JsonPropertyName("user_reports")]
-		public IReadOnlyList<object> UserReports { get; init; } = Array.Empty<object>();
+		public List<object> UserReports { get; init; } = Array.Empty<object>().ToList();
 
 		[JsonPropertyName("secure_media")]
 		public object? SecureMedia { get; init; }
@@ -254,7 +255,7 @@ namespace RedditStats.Common
 		public object? Category { get; init; }
 
 		[JsonPropertyName("secure_media_embed")]
-		public SecureMediaEmbed SecureMediaEmbed { get; init; } = new();
+		public SecureMediaEmbed? SecureMediaEmbed { get; init; }
 
 		[JsonPropertyName("link_flair_text")]
 		public object? LinkFlairText { get; init; }
@@ -281,7 +282,7 @@ namespace RedditStats.Common
 		public object? AuthorFlairCssClass { get; init; }
 
 		[JsonPropertyName("author_flair_richtext")]
-		public IReadOnlyList<object> AuthorFlairRichtext { get; init; } = Array.Empty<object>();
+		public List<object> AuthorFlairRichtext { get; init; } = Array.Empty<object>().ToList();
 
 		[JsonPropertyName("gildings")]
 		public Gildings Gildings { get; init; } = new();
@@ -299,7 +300,7 @@ namespace RedditStats.Common
 		public object? ModNote { get; init; }
 
 		[JsonPropertyName("crosspost_parent_list")]
-		public IReadOnlyList<RedditData> CrosspostParentList { get; init; } = Array.Empty<RedditData>();
+		public List<RedditData> CrosspostParentList { get; init; } = Array.Empty<RedditData>().ToList();
 
 		[JsonPropertyName("created")]
 		public double Created { get; init; }
@@ -362,10 +363,10 @@ namespace RedditStats.Common
 		public Preview Preview { get; init; } = new();
 
 		[JsonPropertyName("all_awardings")]
-		public IReadOnlyList<Award> AllAwardings { get; init; } = Array.Empty<Award>();
+		public List<Award> AllAwardings { get; init; } = Array.Empty<Award>().ToList();
 
 		[JsonPropertyName("awarders")]
-		public IReadOnlyList<object> Awarders { get; init; } = Array.Empty<object>();
+		public List<object> Awarders { get; init; } = Array.Empty<object>().ToList();
 
 		[JsonPropertyName("media_only")]
 		public bool MediaOnly { get; init; }
@@ -383,7 +384,7 @@ namespace RedditStats.Common
 		public object? AuthorFlairText { get; init; }
 
 		[JsonPropertyName("treatment_tags")]
-		public IReadOnlyList<object> TreatmentTags { get; init; } = Array.Empty<object>();
+		public List<object> TreatmentTags { get; init; } = Array.Empty<object>().ToList();
 
 		[JsonPropertyName("visited")]
 		public bool Visited { get; init; }
@@ -437,7 +438,7 @@ namespace RedditStats.Common
 		public bool ContestMode { get; init; }
 
 		[JsonPropertyName("mod_reports")]
-		public IReadOnlyList<object> ModReports { get; init; } = Array.Empty<object>();
+		public List<object> ModReports { get; init; } = Array.Empty<object>().ToList();
 
 		[JsonPropertyName("author_patreon_flair")]
 		public bool AuthorPatreonFlair { get; init; }
@@ -533,7 +534,7 @@ namespace RedditStats.Common
 		public int Dist { get; init; }
 
 		[JsonPropertyName("children")]
-		public IReadOnlyList<UserListingResponse> Children { get; init; } = Array.Empty<UserListingResponse>();
+		public List<UserListingResponse> Children { get; init; } = Array.Empty<UserListingResponse>().ToList();
 
 		[JsonPropertyName("after")]
 		public string After { get; init; } = string.Empty;
