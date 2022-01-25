@@ -1,21 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RedditStats.Common;
 
-namespace RedditStats.Functions
+namespace RedditStats.Functions;
+
+class AdvocateStatisticsDbContext : DbContext
 {
-    class AdvocateStatisticsDbContext : DbContext
-    {
-        public AdvocateStatisticsDbContext(DbContextOptions<AdvocateStatisticsDbContext> options) : base(options)
-        {
-        }
+	public AdvocateStatisticsDbContext(DbContextOptions<AdvocateStatisticsDbContext> options) : base(options)
+	{
+	}
 
-        public DbSet<RedditSubmission> Submissions => Set<RedditSubmission>();
+	public DbSet<RedditSubmission> Submissions => Set<RedditSubmission>();
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<RedditSubmission>().HasKey(x => x.RedditUri);
-        }
-    }
+		modelBuilder.Entity<RedditSubmission>().HasKey(x => x.RedditUri);
+	}
 }

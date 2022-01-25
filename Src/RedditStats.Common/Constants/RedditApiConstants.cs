@@ -1,7 +1,6 @@
-﻿namespace RedditStats.Common
+﻿namespace RedditStats.Common;
+
+public static class RedditApiConstants
 {
-    public static class RedditApiConstants
-    {
-        public const string BaseRedditApiUrl = "https://api.reddit.com";
-    }
+	public const string BaseRedditApiUrl = "https://api.reddit.com";
 }

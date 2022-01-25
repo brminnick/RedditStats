@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9B481928-1FAB-4824-9112-0DF825425D85}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditStats.Functions", "RedditStats.Functions\RedditStats.Functions.csproj", "{F5ED52B8-5153-495B-AAAC-BF6896799299}"

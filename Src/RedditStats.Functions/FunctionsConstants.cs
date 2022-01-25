@@ -1,15 +1,14 @@
 ﻿using System;
-namespace RedditStats.Functions
+namespace RedditStats.Functions;
+
+static class FunctionsConstants
 {
-    static class FunctionsConstants
-    {
-        public const bool ShouldRunOnStartup =
+	public const bool ShouldRunOnStartup =
 #if DEBUG
-            true;
+			true;
 #else
             false;
 #endif
-        public const string GET = "get";
-        public const string RunOncePerDayCron = "0 0 0 * * *";
-    }
+	public const string GET = "get";
+	public const string RunOncePerDayCron = "0 0 0 * * *";
 }
