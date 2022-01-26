@@ -43,31 +43,8 @@ public class Program
 				services.AddDbContext<AdvocateStatisticsDbContext>(options => options.UseSqlServer(_databaseConnectionString));
 
 				// Refit APIs
-				services.AddRefitClient<IRedditApi>()
-					.ConfigureHttpClient(client =>
-					{
-						client.BaseAddress = new Uri(RedditApiConstants.BaseRedditApiUrl);
-						client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue(new System.Net.Http.Headers.ProductHeaderValue(nameof(RedditStats))));
-					})
-					.ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler { AutomaticDecompression = getDecompressionMethods() })
-					.AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(3, sleepDurationProvider));
-
-				services.AddRefitClient<IAdvocateApi>()
-					.ConfigureHttpClient(client =>
-					{
-						client.BaseAddress = new Uri(AdvocateConstants.BaseAdvocateApi);
-						client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue(new System.Net.Http.Headers.ProductHeaderValue(nameof(RedditStats))));
-					})
-					.ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler { AutomaticDecompression = getDecompressionMethods() })
-					.AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(3, sleepDurationProvider));
-
-				// Services
-				services.AddSingleton<AdvocateService>();
-				services.AddSingleton<RedditApiService>();
+				services.AddRedditStatsServices();
 			});
-
-		static TimeSpan sleepDurationProvider(int attemptNumber) => TimeSpan.FromSeconds(Math.Pow(2, attemptNumber));
-		static DecompressionMethods getDecompressionMethods() => DecompressionMethods.Deflate | DecompressionMethods.GZip;
 	}
 
 	static async Task InitializeDatabase(IHost host)
